@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('shift', function (Blueprint $table) {
             $table->id();
-            $table->string('shift_type', 12);
+            $table->string('shift_type', 12)->unique();
             $table->timestamps();
         });
     }
