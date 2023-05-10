@@ -22,10 +22,6 @@ return new class extends Migration
                 table: 'student',
                 indexName: 'fk_student_release_student'
             );
-            $table->foreignId('release_status')->cascadeOnDelete()->constrained(
-                table: 'release_status',
-                indexName: 'fk_class_release_release_status'
-            );
             $table->timestamps();
         });
     }

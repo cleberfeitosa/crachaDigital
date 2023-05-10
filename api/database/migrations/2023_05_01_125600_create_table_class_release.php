@@ -19,9 +19,6 @@ return new class extends Migration
             $table->foreignId('class')->cascadeOnDelete()->constrained(
                 table: 'class', indexName: 'fk_class_release_class'
             );
-            $table->foreignId('release_status')->cascadeOnDelete()->constrained(
-                table: 'release_status', indexName: 'fk_class_release_release_status'
-            );
             $table->timestamps();
         });
     }
