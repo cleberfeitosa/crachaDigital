@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('student_release', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('authorized_by', 60)->nullable();
-            $table->foreignId('request_release')->cascadeOnDelete()->constrained(
+            $table->foreignUuid('request_release')->cascadeOnDelete()->constrained(
                 table: 'request_release',
                 indexName: 'fk_class_release_request_release'
             );
-            $table->foreignId('student')->cascadeOnDelete()->constrained(
+            $table->foreignUuid('student')->cascadeOnDelete()->constrained(
                 table: 'student',
                 indexName: 'fk_student_release_student'
             );

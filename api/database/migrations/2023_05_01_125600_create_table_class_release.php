@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('class_release', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('request_release')->cascadeOnDelete()->constrained(
+            $table->uuid('id')->primary();
+            $table->foreignUuid('request_release')->cascadeOnDelete()->constrained(
                 table: 'request_release', indexName: 'fk_class_release_request_release'
             );
-            $table->foreignId('class')->cascadeOnDelete()->constrained(
+            $table->foreignUuid('class')->cascadeOnDelete()->constrained(
                 table: 'class', indexName: 'fk_class_release_class'
             );
             $table->timestamps();

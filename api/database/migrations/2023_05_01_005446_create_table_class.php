@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('class', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string("class_code", 25)->unique();
             $table->string("class_name", 50);
-            $table->foreignId('course')->cascadeOnDelete()->constrained(
+            $table->foreignUuid('course')->cascadeOnDelete()->constrained(
                 table: 'course', indexName: 'fk_class_course'
             );
-            $table->foreignId('shift')->cascadeOnDelete()->constrained(
+            $table->foreignUuid('shift')->cascadeOnDelete()->constrained(
                 table: 'shift', indexName: 'fk_class_shift'
             );
             $table->timestamps();

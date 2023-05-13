@@ -12,14 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('request_release', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('requester')->cascadeOnDelete()->constrained(
+            $table->uuid('id')->primary();
+            $table->foreignUuid('requester')->cascadeOnDelete()->constrained(
                 table: 'server', indexName: 'fk_request_release_requester'
             );
-            $table->foreignId('evaluator')->cascadeOnDelete()->constrained(
+            $table->foreignUuid('evaluator')->cascadeOnDelete()->constrained(
                 table: 'server', indexName: 'fk_request_release_evaluator'
             );
-            $table->foreignId('status')->cascadeOnDelete()->constrained(
+            $table->foreignUuid('status')->cascadeOnDelete()->constrained(
                 table: 'request_release_status', indexName: 'fk_request_release_status'
             );
             $table->timestamps();

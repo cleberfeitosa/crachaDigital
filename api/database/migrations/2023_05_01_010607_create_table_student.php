@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('student', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string("student_name", 50);
             $table->string("registration", 15)->unique();
             $table->string("password", 50);
-            $table->foreignId('class')->cascadeOnDelete()->constrained(
+            $table->foreignUuid('class')->cascadeOnDelete()->constrained(
                 table: 'class', indexName: 'fk_student_class'
             );
             $table->timestamps();
