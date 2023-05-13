@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Course;
+use App\Models\CourseType;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,3 +19,19 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// Route::get("/teste", function (Request $request) {
+//     // $response = CourseType::create(['course_type' => 'Tecnólogo']);
+//     // var_dump($response->id);
+
+//     // $response = Course::create([
+//     //     'course_name' => 'ADS', 
+//     //     'course_code' => '1001', 
+//     //     'course_type' => '99287338-e541-43f5-b598-264ee380fe16'
+//     // ]);
+//     // var_dump($response->course_name);
+
+//     $course = Course::all();
+//     var_dump($course[0]);
+//     // return "a";
+// });
