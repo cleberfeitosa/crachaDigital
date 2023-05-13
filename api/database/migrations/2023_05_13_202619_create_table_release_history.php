@@ -11,17 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('release_danied', function (Blueprint $table) {
+        Schema::create('release_history', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('reason', 149);
+            $table->string('reason', 149)->nullable();
             $table->foreignUuid('release_type')->cascadeOnDelete()->constrained(
-                table: 'release_type', indexName: 'fk_release_danied_release_type'
+                table: 'release_type', indexName: 'fk_release_history_release_type'
             );
             $table->foreignUuid('student')->cascadeOnDelete()->constrained(
-                table: 'student', indexName: 'fk_release_danied_student'
+                table: 'student', indexName: 'fk_release_history_student'
             );
             $table->foreignUuid('guard')->cascadeOnDelete()->constrained(
-                table: 'guard', indexName: 'fk_release_danied_guard'
+                table: 'guard', indexName: 'fk_release_history_guard'
             );
             $table->timestamps();
         });
@@ -32,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('release_danied');
+        Schema::dropIfExists('release_history');
     }
 };
