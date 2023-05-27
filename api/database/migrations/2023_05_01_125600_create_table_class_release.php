@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('class_release', function (Blueprint $table) {
+        Schema::create('team_release', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('request_release')->cascadeOnDelete()->constrained(
                 table: 'request_release', indexName: 'fk_class_release_request_release'
             );
-            $table->foreignUuid('class')->cascadeOnDelete()->constrained(
-                table: 'class', indexName: 'fk_class_release_class'
+            $table->foreignUuid('team')->cascadeOnDelete()->constrained(
+                table: 'team', indexName: 'fk_class_release_class'
             );
             $table->timestamps();
         });
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('class_release');
+        Schema::dropIfExists('team_release');
     }
 };

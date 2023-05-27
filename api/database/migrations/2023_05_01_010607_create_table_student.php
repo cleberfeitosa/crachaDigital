@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string("student_name", 50);
             $table->string("registration", 15)->unique();
             $table->string("password", 50);
-            $table->foreignUuid('class')->cascadeOnDelete()->constrained(
-                table: 'class', indexName: 'fk_student_class'
+            $table->foreignUuid('team')->cascadeOnDelete()->constrained(
+                table: 'team', indexName: 'fk_student_class'
             );
             $table->timestamps();
         });

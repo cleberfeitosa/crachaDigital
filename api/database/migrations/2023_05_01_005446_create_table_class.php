@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('class', function (Blueprint $table) {
+        Schema::create('team', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string("class_code", 25)->unique();
-            $table->string("class_name", 50);
+            $table->string('team_code', 25)->unique();
+            $table->string('team_name', 50);
             $table->foreignUuid('course')->cascadeOnDelete()->constrained(
                 table: 'course', indexName: 'fk_class_course'
             );
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('class');
+        Schema::dropIfExists('team');
     }
 };
