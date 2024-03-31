@@ -11,9 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('release_type', function (Blueprint $table) {
+        Schema::create('discentes', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('release_type', 20);
+            $table->string('nome', 96);
+            $table->string('matricula', 15);
+            $table->foreignUuid('turma_id')->cascadeOnDelete()->constrained(
+                table: 'turmas',
+                indexName: 'fk_discente_turma_id'
+            );
             $table->timestamps();
         });
     }
@@ -23,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('release_type');
+        Schema::dropIfExists('discentes');
     }
 };

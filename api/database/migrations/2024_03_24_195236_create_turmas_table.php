@@ -11,18 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sector', function (Blueprint $table) {
+        Schema::create('turmas', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('name', 10)->unique();
+            $table->string('nome', 36);
+            $table->string('curso', 26);
+            $table->integer('periodo', false, true);
+            $table->string('turno', 12);
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('sector');
+        Schema::dropIfExists('turmas');
     }
 };

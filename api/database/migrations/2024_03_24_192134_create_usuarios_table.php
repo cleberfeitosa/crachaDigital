@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('server', function (Blueprint $table) {
+        Schema::create('usuarios', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->string('server_name', 50);
-            $table->string('registration', 15)->unique();
-            $table->string('password', 60);
-            $table->foreignUuid('sector')->cascadeOnDelete()->constrained(
-                table: 'sector', indexName: 'fk_server_sector'
-            );
+            $table->string('nome', 72);
+            $table->string('matricula', 15);
+            $table->string('senha', 96);
+            $table->string('papel', 32);
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('server');
+        Schema::dropIfExists('usuarios');
     }
 };
