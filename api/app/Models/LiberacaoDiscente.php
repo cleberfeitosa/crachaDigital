@@ -23,7 +23,7 @@ class LiberacaoDiscente extends Model
         'vigilante_id',
         'situacao',
         'decidido_em',
-        'motivoNegacao',
+        'motivo_negacao',
     ];
 
     public function liberacaoTurma(): BelongsTo

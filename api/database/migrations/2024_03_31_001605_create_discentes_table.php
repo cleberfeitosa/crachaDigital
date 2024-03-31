@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('discentes', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('nome', 96);
-            $table->string('matricula', 15);
+            $table->string('matricula', 15)->unique();
             $table->foreignUuid('turma_id')->cascadeOnDelete()->constrained(
                 table: 'turmas',
                 indexName: 'fk_discente_turma_id'

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('usuarios', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('nome', 72);
-            $table->string('matricula', 15);
+            $table->string('matricula', 15)->unique();
             $table->string('senha', 96);
             $table->string('papel', 32);
             $table->timestamps();
