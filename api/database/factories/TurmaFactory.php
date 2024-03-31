@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Turma;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -10,6 +11,13 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class TurmaFactory extends Factory
 {
     /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Turma::class;
+
+    /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
@@ -17,7 +25,10 @@ class TurmaFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nome' => fake()->name(),
+            'curso' => fake()->randomElement(['Informática', 'Química', 'Administração', 'Alimentos']),
+            'periodo' => fake()->randomElement([1, 2, 3]),
+            'turno' => fake()->randomElement(['Manhã', 'Tarde', 'Noite']),
         ];
     }
 }

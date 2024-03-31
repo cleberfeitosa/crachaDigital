@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Discente;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -10,6 +11,13 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 class DiscenteFactory extends Factory
 {
     /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Discente::class;
+
+    /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
@@ -17,7 +25,8 @@ class DiscenteFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nome' => fake()->name(),
+            'matricula' => strval(fake()->unique()->numberBetween(100000000000000, 999999999999)),
         ];
     }
 }

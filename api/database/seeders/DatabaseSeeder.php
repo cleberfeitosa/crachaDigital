@@ -3,6 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Discente;
+use App\Models\Turma;
+use App\Models\Usuario;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -18,5 +22,14 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+
+        Turma::factory()
+            ->has(Discente::factory()->count(50))
+            ->count(50)
+            ->create();
+
+        Usuario::factory()
+            ->count(50)
+            ->create();
     }
 }
