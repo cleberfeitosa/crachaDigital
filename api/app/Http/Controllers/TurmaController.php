@@ -4,15 +4,48 @@ namespace App\Http\Controllers;
 
 use App\Models\Turma;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class TurmaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $filtros = $request->query();
+        $builder = DB::table('turmas');
+        if (key_exists('nome', $filtros)) {
+
+            $builder->orWhere(
+                'nome',
+                'LIKE',
+                '%' . $filtros['nome'] . '%'
+            );
+        }
+        if (key_exists('curso', $filtros)) {
+
+            $builder->orWhere(
+                'curso',
+                'LIKE',
+                '%' . $filtros['curso'] . '%'
+            );
+        }
+        if (key_exists('periodo', $filtros)) {
+
+            $builder->orWhere(
+                'periodo',
+                'LIKE',
+                '%' . $filtros['periodo'] . '%'
+            );
+        }
+
+        $turmas = $builder->get();
+
+        return response()->json([
+            'quantidadeReistros' => count($turmas),
+            'data' => $turmas
+        ], 200);
     }
 
     /**

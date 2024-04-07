@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TurmaController;
 use App\Http\Controllers\UsuarioController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -34,18 +35,18 @@ Route::group([
     // Route::post('me', 'AuthController@me');
 });
 
-
-// Route::group([
-//     'middleware' => 'jwt.auth',
-//     'prefix' => 'usuarios'
-// ], function () {
-//     Route::get('/redefinir-senha', [AuthController::class, 'redefinirPassword']);
-// });
-
-
 Route::group([
     'middleware' => 'jwt.auth',
     'prefix' => 'usuarios'
 ], function ($router) {
     Route::patch('/redefinir-senha', [UsuarioController::class, 'redefinirPassword']);
+});
+
+
+
+Route::group([
+    'middleware' => 'jwt.auth',
+    'prefix' => 'turmas'
+], function ($router) {
+    Route::get('/', [TurmaController::class, 'index']);
 });
