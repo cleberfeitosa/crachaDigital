@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Usuario;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
@@ -61,5 +62,21 @@ class UsuarioController extends Controller
     public function destroy(Usuario $usuario)
     {
         //
+    }
+
+    public function redefinirPassword(Request $request)
+    {
+        $usuarioId = $request->user()->id;
+
+        $usuario = Usuario::find($usuarioId);
+
+        $newPassword = $request->input('password');
+        $newPasswordHash = Hash::make($newPassword);
+
+        $usuario->password = $newPasswordHash;
+
+        $usuario->save();
+
+        return response()->json([], 204);
     }
 }

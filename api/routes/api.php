@@ -1,10 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UsuarioController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Models\Course;
-use App\Models\CourseType;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,21 +20,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// Route::get("/teste", function (Request $request) {
-//     // $response = CourseType::create(['course_type' => 'Tecnólogo']);
-//     // var_dump($response->id);
-
-//     // $response = Course::create([
-//     //     'course_name' => 'ADS', 
-//     //     'course_code' => '1001', 
-//     //     'course_type' => '99287338-e541-43f5-b598-264ee380fe16'
-//     // ]);
-//     // var_dump($response->course_name);
-
-//     $course = Course::all();
-//     var_dump($course[0]);
-//     // return "a";
-// });
 
 Route::group([
 
@@ -51,11 +35,17 @@ Route::group([
 });
 
 
+// Route::group([
+//     'middleware' => 'jwt.auth',
+//     'prefix' => 'usuarios'
+// ], function () {
+//     Route::get('/redefinir-senha', [AuthController::class, 'redefinirPassword']);
+// });
+
+
 Route::group([
     'middleware' => 'jwt.auth',
-    'prefix' => 'teste'
-], function () {
-    Route::get('/', function () {
-        return 'ok';
-    });
+    'prefix' => 'usuarios'
+], function ($router) {
+    Route::patch('/redefinir-senha', [UsuarioController::class, 'redefinirPassword']);
 });
