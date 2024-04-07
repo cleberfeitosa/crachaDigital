@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Usuario;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Usuario>
@@ -27,7 +28,7 @@ class UsuarioFactory extends Factory
         return [
             'nome' => fake()->name(),
             'matricula' => strval(fake()->unique()->numberBetween(100000000000000, 999999999999)),
-            'senha' => '12345',
+            'senha' => Hash::make('12345'),
             'papel' => fake()->randomElement(['coordenador', 'vigilante']),
         ];
     }
