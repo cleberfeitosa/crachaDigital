@@ -1,10 +1,13 @@
 version: "3.7"
 services:
-  postgres:
-    container_name: db
+  db:
     image: postgres:latest
+    container_name: db
+    restart: always
     environment:
       - POSTGRES_USER=${DB_USERNAME}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./dataset:/docker-entrypoint-initdb.d
     ports:
       - 5433:5432

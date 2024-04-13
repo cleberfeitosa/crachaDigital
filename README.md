@@ -18,3 +18,32 @@ As seguintes ferramentas são utilizadas no projeto:
 - PHP
 - Laravel
 - PostgresSQL
+
+## Como rodar o projeto
+
+### API
+
+1. Instale as dependências do Laravel
+   ```bash
+   composer install
+   ```
+2. Crie o arquivo .env
+   ```bash
+   touch .env
+   ```
+3. Inicie o container do banco de dados
+   ```shell
+   docker compose up
+   ```
+4. Rode as migrations
+   ```shell
+   php artisan migrate
+   ```
+5. Rode a seed para popular o banco de dados
+   ```shell
+   php artisan db:seed --class=DatabaseSeeder
+   ```
+6. Inicie a API
+   ```shell
+   php artisan db:seed --class=DatabaseSeeder
+   ```

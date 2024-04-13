@@ -1,0 +1,1 @@
+CREATE DATABASE cracha_digital;
