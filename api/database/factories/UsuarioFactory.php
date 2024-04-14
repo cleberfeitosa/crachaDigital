@@ -28,7 +28,7 @@ class UsuarioFactory extends Factory
         return [
             'nome' => fake()->name(),
             'matricula' => strval(fake()->unique()->numberBetween(100000000000000, 999999999999)),
-            'senha' => Hash::make('12345'),
+            'password' => Hash::make('12345'),
             'papel' => fake()->randomElement(['coordenador', 'vigilante']),
         ];
     }
