@@ -45,5 +45,5 @@ As seguintes ferramentas são utilizadas no projeto:
    ```
 6. Inicie a API
    ```shell
-   php artisan db:seed --class=DatabaseSeeder
+   php artisan serve
    ```
