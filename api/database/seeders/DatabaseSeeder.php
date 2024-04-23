@@ -5,7 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Discente;
-use App\Models\Turma;
+use App\Modules\Turmas\Core\Entities\Turma;
 use App\Models\Usuario;
 use Illuminate\Database\Seeder;
 

@@ -2,11 +2,11 @@
 
 namespace Database\Factories;
 
-use App\Models\Turma;
+use App\Modules\Turmas\Core\Entities\Turma;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Turma>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Modules\Turmas\Core\Entities\Turma>
  */
 class TurmaFactory extends Factory
 {
