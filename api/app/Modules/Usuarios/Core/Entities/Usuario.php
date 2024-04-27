@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App\Modules\Usuarios\Core\Entities;
 
+use App\Models\LiberacaoDiscente;
+use App\Models\LiberacaoTurma;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -31,7 +33,8 @@ class Usuario extends Authenticatable implements JWTSubject
         'nome',
         'matricula',
         'password',
-        'papel'
+        'papel',
+        'primeiro_acesso',
     ];
 
     public function liberacaoTurmas(): HasMany

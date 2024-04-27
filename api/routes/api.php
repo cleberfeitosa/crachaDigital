@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UsuarioController;
+use App\Modules\Auth\Adapters\Http\Controllers\AuthController;
 use App\Modules\Turmas\Adapters\Http\Controllers\TurmaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;

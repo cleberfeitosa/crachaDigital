@@ -6,7 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\Discente;
 use App\Modules\Turmas\Core\Entities\Turma;
-use App\Models\Usuario;
+use App\Modules\Usuarios\Core\Entities\Usuario;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
