@@ -3,6 +3,7 @@
 namespace App\Modules\Turmas\Adapters\Database;
 
 use App\Modules\Common\Core\Entities\Repository;
+use App\Modules\Turmas\Core\Entities\Turma;
 use App\Modules\Turmas\Core\Interfaces\TurmaRepository;
 
 class TurmaRepositoryImpl extends Repository implements TurmaRepository
@@ -15,23 +16,24 @@ class TurmaRepositoryImpl extends Repository implements TurmaRepository
 
     public function findAllTurmas($filtros = [])
     {
+        $builder = Turma::query();
 
         if (key_exists('nome', $filtros)) {
-            $this->whereLike('nome', $filtros['nome']);
+            $builder = $this->whereLike($builder, 'nome', $filtros['nome']);
         }
 
         if (key_exists('curso', $filtros)) {
-            $this->whereLike('curso', $filtros['curso']);
+            $builder = $this->whereLike($builder, 'curso', $filtros['curso']);
         }
 
         if (key_exists('periodo', $filtros)) {
-            $this->whereLike('periodo', $filtros['periodo']);
+            $builder = $this->whereLike($builder, 'periodo', $filtros['periodo']);
         }
 
         $page = key_exists('page', $filtros) ? $filtros['page'] : 1;
         $take = key_exists('take', $filtros) ? $filtros['take'] : 15;
 
 
-        return $this->paginate($page, $take);
+        return $this->paginate($builder, $page, $take);
     }
 }

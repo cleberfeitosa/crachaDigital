@@ -10,11 +10,9 @@ use Illuminate\Support\Facades\DB;
 class UsuarioRepositoryImpl extends Repository implements UsuarioRepository
 {
 
-    const TABLE_NAME = 'usuarios';
-
     public function __construct()
     {
-        parent::__construct(UsuarioRepositoryImpl::TABLE_NAME);
+        parent::__construct('usuarios');
     }
 
     function findUsuarioById($usuarioId): Usuario | null

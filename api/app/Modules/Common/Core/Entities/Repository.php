@@ -6,19 +6,16 @@ use Illuminate\Support\Facades\DB;
 
 class Repository
 {
-    protected $builder;
     protected $tableName;
-
 
     public function __construct(string $tableName)
     {
         $this->tableName = $tableName;
-        $this->builder = DB::table($tableName);
     }
 
-    protected function paginate($page = 1, $take = 15)
+    protected function paginate($builder, $page = 1, $take = 15)
     {
-        $registers = $this->builder->skip($page * $take)->take($take)->get();
+        $registers = $builder->skip($page * $take)->take($take)->get();
 
         $totalRegisters = DB::table($this->tableName)->count();
         $lastPage = ceil($totalRegisters / $take);
@@ -31,9 +28,9 @@ class Repository
         ];
     }
 
-    protected function whereLike($columnName, $value)
+    protected function whereLike($builder, $columnName, $value)
     {
-        $this->builder->whereRaw(
+        return $builder->whereRaw(
             "UPPER($columnName) LIKE UPPER(?)",
             ["%$value%"]
         );
