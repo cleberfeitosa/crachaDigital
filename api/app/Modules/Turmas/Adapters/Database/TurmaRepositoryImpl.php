@@ -36,4 +36,11 @@ class TurmaRepositoryImpl extends Repository implements TurmaRepository
 
         return $this->paginate($builder, $page, $take);
     }
+
+    function findTurmaById(string $turmaId): Turma | null
+    {
+        $builder = Turma::query();
+
+        return $builder->where('id', '=', $turmaId)->first();
+    }
 }

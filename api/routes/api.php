@@ -43,4 +43,5 @@ Route::group([
     'prefix' => 'turmas'
 ], function ($router) {
     Route::get('/', [TurmaController::class, 'index']);
+    Route::get('/{id}', [TurmaController::class, 'show']);
 });
