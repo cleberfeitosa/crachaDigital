@@ -47,6 +47,11 @@ class Usuario extends Authenticatable implements JWTSubject
         return $this->HasMany(LiberacaoDiscente::class);
     }
 
+    public function alterarSenha($senha)
+    {
+        $this->password = Hash::make($senha);
+    }
+
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *

@@ -35,4 +35,12 @@ class Repository
             ["%$value%"]
         );
     }
+
+    /**
+     * @param Model $entity
+     */
+    function save($entity)
+    {
+        $entity->save();
+    }
 }
