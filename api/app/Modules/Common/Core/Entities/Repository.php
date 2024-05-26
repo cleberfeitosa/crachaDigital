@@ -2,8 +2,6 @@
 
 namespace App\Modules\Common\Core\Entities;
 
-use Illuminate\Support\Facades\DB;
-
 class Repository
 {
     protected $tableName;
@@ -15,15 +13,24 @@ class Repository
 
     protected function paginate($builder, $page = 1, $take = 15)
     {
-        $registers = $builder->skip($page * $take)->take($take)->get();
+        $page = max(1, $page ?? 1);
+        $take = max(1, $take ?? 15);
 
-        $totalRegisters = DB::table($this->tableName)->count();
+        $totalRegisters = $builder->count();
+
+        // Calcular a página atual garantindo que não ultrapasse o número total de páginas
+        $currentPage = min(ceil($totalRegisters / $take), $page);
+
+        // Calcular o deslocamento
+        $skip = ($currentPage - 1) * $take;
+
+        $registers = $builder->skip($skip)->take($take)->get();
         $lastPage = ceil($totalRegisters / $take);
 
         return [
             'data' => $registers,
-            'total' => $take,
-            'currentPage' => $page,
+            'total' => $totalRegisters,
+            'currentPage' => $currentPage,
             'lastPage' => $lastPage
         ];
     }
