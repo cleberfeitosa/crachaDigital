@@ -2,11 +2,9 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
-use App\Models\Discente;
-use App\Modules\Turmas\Core\Entities\Turma;
-use App\Modules\Usuarios\Core\Entities\Usuario;
+use Database\Factories\DiscenteFactory;
+use Database\Factories\TurmaFactory;
+use Database\Factories\UsuarioFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,12 +15,15 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        Turma::factory()
-            ->has(Discente::factory()->count(50))
+        $turmaFactory = TurmaFactory::new();
+        $discenteFactory = DiscenteFactory::new();
+
+        $turmaFactory->has($discenteFactory->count(50))
             ->count(50)
             ->create();
 
-        Usuario::factory()
+        $usuarioFactory = UsuarioFactory::new();
+        $usuarioFactory
             ->count(50)
             ->create();
     }

@@ -5,13 +5,15 @@ namespace App\Modules\Turmas\Adapters\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Modules\Common\Application\Utils\ExceptionHandler;
 use App\Modules\Turmas\Application\Services\TurmaService;
+use App\Modules\Turmas\Application\UseCases\CreateLiberacaoTurmaUseCase;
 use Illuminate\Http\Request;
 
 class TurmaController extends Controller
 {
 
-    public function __construct(protected TurmaService $turmaService)
-    {
+    public function __construct(
+        protected TurmaService $turmaService,
+    ) {
     }
 
     public function index(Request $request)
@@ -37,9 +39,9 @@ class TurmaController extends Controller
 
             $turma = $this->turmaService->findById($id);
 
-            return response()->json([
+            return response()->json(
                 $turma
-            ]);
+            );
         } catch (\Throwable $th) {
             $formatedException = ExceptionHandler::format($th);
 

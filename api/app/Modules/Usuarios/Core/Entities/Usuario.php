@@ -3,7 +3,7 @@
 namespace App\Modules\Usuarios\Core\Entities;
 
 use App\Models\LiberacaoDiscente;
-use App\Models\LiberacaoTurma;
+use App\Modules\Turmas\Core\Entities\LiberacaoTurma;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;

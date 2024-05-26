@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Auth\Application\Mappers;
+namespace App\Modules\Auth\Adapters\Mappers;
 
 use App\Modules\Auth\Application\Dtos\UsuarioAuthenticatedDto;
 

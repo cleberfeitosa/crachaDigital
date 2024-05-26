@@ -1,6 +1,8 @@
 <?php
 
 use App\Modules\Auth\Adapters\Http\Controllers\AuthController;
+use App\Modules\Discentes\Adapters\Http\DiscenteController;
+use App\Modules\Discentes\Adapters\Http\Controllers\LiberacaoDiscenteController;
 use App\Modules\Turmas\Adapters\Http\Controllers\TurmaController;
 use App\Modules\Usuarios\Adapters\Http\Controllers\UsuarioController;
 use Illuminate\Http\Request;
@@ -44,4 +46,14 @@ Route::group([
 ], function ($router) {
     Route::get('/', [TurmaController::class, 'index']);
     Route::get('/{id}', [TurmaController::class, 'show']);
+    Route::post('/{id}/liberacao', [TurmaController::class, 'createLiberacaoTurma']);
+});
+
+Route::group([
+    'middleware' => ['jwt.auth', 'role.coordenador'],
+    'prefix' => 'discentes'
+], function ($router) {
+    Route::get('/', [DiscenteController::class, 'index']);
+    Route::get('/{id}', [DiscenteController::class, 'show']);
+    Route::post('/liberacoes', [LiberacaoDiscenteController::class, 'createLiberacoesDiscentes']);
 });

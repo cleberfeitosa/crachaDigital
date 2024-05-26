@@ -2,7 +2,7 @@
 
 namespace App\Modules\Turmas\Core\Entities;
 
-use App\Models\Discente;
+use App\Modules\Discentes\Core\Entities\Discente;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

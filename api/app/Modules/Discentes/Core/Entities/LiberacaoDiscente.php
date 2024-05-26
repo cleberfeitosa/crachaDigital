@@ -1,7 +1,9 @@
 <?php
 
-namespace App\Models;
+namespace App\Modules\Discentes\Core\Entities;
 
+use App\Modules\Discentes\Core\Enums\SituacaoLiberacaoEnum;
+use App\Modules\Usuarios\Core\Entities\Usuario;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,18 +20,12 @@ class LiberacaoDiscente extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        'liberacao_turma_id',
         'discente_id',
         'vigilante_id',
         'situacao',
         'decidido_em',
         'motivo_negacao',
     ];
-
-    public function liberacaoTurma(): BelongsTo
-    {
-        return $this->belongsTo(liberacaoTurma::class);
-    }
 
     public function discente(): BelongsTo
     {
@@ -39,5 +35,16 @@ class LiberacaoDiscente extends Model
     public function vigilante(): BelongsTo
     {
         return $this->belongsTo(Usuario::class);
+    }
+
+    /**
+     * Métodos personalizados
+     */
+    static public function createLiberacaoDiscente(string $discenteId)
+    {
+        $liberacaoDiscente = new LiberacaoDiscente();
+        $liberacaoDiscente->discente_id = $discenteId;
+        $liberacaoDiscente->situacao = SituacaoLiberacaoEnum::ATIVA;
+        return $liberacaoDiscente;
     }
 }

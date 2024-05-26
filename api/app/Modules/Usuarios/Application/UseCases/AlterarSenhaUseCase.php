@@ -18,7 +18,7 @@ class AlterarSenhaUseCase
      */
     function run($usarioId, $senha)
     {
-        $usuario = $this->usuarioService->findUsuarioById($usarioId);
+        $usuario = $this->usuarioService->findById($usarioId);
 
         $usuario->alterarSenha($senha);
 

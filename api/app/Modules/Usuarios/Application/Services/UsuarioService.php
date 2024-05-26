@@ -13,7 +13,7 @@ class UsuarioService
     ) {
     }
 
-    public function findUsuarioById($usuarioId): Usuario
+    public function findById($usuarioId): Usuario
     {
         $usuario = $this->turmaRepository->findUsuarioById($usuarioId);
 

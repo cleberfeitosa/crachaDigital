@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Discente;
+use App\Modules\Discentes\Core\Entities\Discente;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

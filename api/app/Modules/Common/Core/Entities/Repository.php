@@ -37,10 +37,28 @@ class Repository
     }
 
     /**
-     * @param Model $entity
+     * @param Model $entity Entidade a ser salva
      */
     function save($entity)
     {
         $entity->save();
+        $entity->refresh();
+        return $entity;
+    }
+    /**
+     * Salva múltiplos registros.
+     *
+     * @param array $entities Array de entidades a serem salvas.
+     * @return array Array de entidades salvas.
+     */
+    function saveMany($entities)
+    {
+        $savedEntities = [];
+
+        foreach ($entities as $entity) {
+            $savedEntities[] = $this->save($entity);
+        }
+
+        return $savedEntities;
     }
 }

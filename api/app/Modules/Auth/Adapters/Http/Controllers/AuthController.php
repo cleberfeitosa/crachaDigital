@@ -4,7 +4,7 @@ namespace App\Modules\Auth\Adapters\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Modules\Auth\Application\Mappers\UsuarioAuthenticatedMapper;
+use App\Modules\Auth\Adapters\Mappers\UsuarioAuthenticatedMapper;
 use App\Modules\Auth\Application\UseCases\AuthenticateUseCase;
 use App\Modules\Common\Application\Utils\ExceptionHandler;
 

@@ -12,11 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('liberacao_discentes', function (Blueprint $table) {
-            $table->id();
-            $table->foreignUuid('liberacao_turma_id')->cascadeOnDelete()->constrained(
-                table: 'liberacao_turmas',
-                indexName: 'fk_liberacao_discentes_liberacao_turma_id'
-            );
+            $table->uuid('id')->primary();
             $table->foreignUuid('discente_id')->cascadeOnDelete()->constrained(
                 table: 'discentes',
                 indexName: 'fk_liberacao_discentes_discente_id'
@@ -25,9 +21,9 @@ return new class extends Migration
                 table: 'usuarios',
                 indexName: 'fk_liberacao_discentes_vigilante_id',
             );
-            $table->string('situacao', 20);
+            $table->integer('situacao', false, true)->nullable(false);
             $table->string('motivo_negacao', 520)->nullable();
-            $table->dateTime('decidido_em');
+            $table->dateTime('decidido_em')->nullable();
             $table->timestamps();
         });
     }

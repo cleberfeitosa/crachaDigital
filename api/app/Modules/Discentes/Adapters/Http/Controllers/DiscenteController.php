@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
 
-use App\Models\Discente;
+namespace App\Modules\Discentes\Adapters\Http;
+
+use App\Http\Controllers\Controller;
+use App\Modules\Discentes\Core\Entities\Discente;
 use Illuminate\Http\Request;
 
 class DiscenteController extends Controller
