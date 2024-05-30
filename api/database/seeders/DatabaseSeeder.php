@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Database\Factories\CursoFactory;
 use Database\Factories\DiscenteFactory;
 use Database\Factories\TurmaFactory;
 use Database\Factories\UsuarioFactory;
@@ -15,12 +16,15 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
+        $cursoFactory = CursoFactory::new();
         $turmaFactory = TurmaFactory::new();
         $discenteFactory = DiscenteFactory::new();
 
-        $turmaFactory->has($discenteFactory->count(50))
-            ->count(50)
-            ->create();
+
+        $cursoFactory->has(
+            $turmaFactory->has($discenteFactory->count(50))
+                ->count(10)
+        )->count(4)->create();
 
         $usuarioFactory = UsuarioFactory::new();
         $usuarioFactory

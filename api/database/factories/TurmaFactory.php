@@ -26,7 +26,6 @@ class TurmaFactory extends Factory
     {
         return [
             'nome' => fake()->name(),
-            'curso' => fake()->randomElement(['Informática', 'Química', 'Administração', 'Alimentos']),
             'periodo' => fake()->randomElement([1, 2, 3]),
             'turno' => fake()->randomElement(['Manhã', 'Tarde', 'Noite']),
         ];

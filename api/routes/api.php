@@ -1,7 +1,7 @@
 <?php
 
 use App\Modules\Auth\Adapters\Http\Controllers\AuthController;
-use App\Modules\Discentes\Adapters\Http\DiscenteController;
+use App\Modules\Discentes\Adapters\Http\Controllers\DiscenteController;
 use App\Modules\Discentes\Adapters\Http\Controllers\LiberacaoDiscenteController;
 use App\Modules\Turmas\Adapters\Http\Controllers\TurmaController;
 use App\Modules\Usuarios\Adapters\Http\Controllers\UsuarioController;

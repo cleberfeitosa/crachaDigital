@@ -1,67 +1,34 @@
 <?php
 
 
-namespace App\Modules\Discentes\Adapters\Http;
+namespace App\Modules\Discentes\Adapters\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Modules\Discentes\Core\Entities\Discente;
+use App\Modules\Common\Application\Utils\ExceptionHandler;
+use App\Modules\Discentes\Application\Services\DiscenteService;
 use Illuminate\Http\Request;
 
 class DiscenteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
+    public function __construct(
+        protected DiscenteService $discenteService,
+    ) {
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function index(Request $request)
     {
-        //
-    }
+        try {
+            $filtros = $request->query();
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+            $pagedDiscente = $this->discenteService->findAll($filtros);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Discente $discente)
-    {
-        //
-    }
+            return response()->json([
+                $pagedDiscente
+            ], 200);
+        } catch (\Throwable $th) {
+            $formatedException = ExceptionHandler::format($th);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Discente $discente)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Discente $discente)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Discente $discente)
-    {
-        //
+            return response()->json($formatedException, $formatedException['code']);
+        }
     }
 }

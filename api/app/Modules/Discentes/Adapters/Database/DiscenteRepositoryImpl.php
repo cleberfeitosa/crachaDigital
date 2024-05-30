@@ -19,4 +19,25 @@ class DiscenteRepositoryImpl extends Repository implements DiscenteRepository
 
         return $builder->whereIn('id', $discentesIds)->get();
     }
+
+    public function findAllDiscentes($filtros = [])
+    {
+        $builder = Discente::query();
+
+        $this->applyDiscentesFilters($builder, $filtros);
+
+        $page = isset($filtros['page']) ? max(1, $filtros['page']) : 1;
+        $take = isset($filtros['take']) ? max(1, $filtros['take']) : 15;
+
+        return $this->paginate($builder, $page, $take);
+    }
+
+    private function applyDiscentesFilters($builder, $filtros)
+    {
+        if (!empty($filtros)) {
+            if (isset($filtros['turma_id'])) {
+                $builder->where('turma_id', $filtros['turma_id']);
+            }
+        }
+    }
 }

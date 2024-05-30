@@ -2,14 +2,12 @@
 
 namespace App\Modules\Turmas\Core\Entities;
 
-use App\Modules\Discentes\Core\Entities\Discente;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Turma extends Model
+class Curso extends Model
 {
     use HasFactory, HasUuids;
 
@@ -18,7 +16,7 @@ class Turma extends Model
      *
      * @var string
      */
-    protected $table = 'turmas';
+    protected $table = 'cursos';
 
     /**
      * Os atributos que são atribuíveis em massa.
@@ -27,18 +25,10 @@ class Turma extends Model
      */
     protected $fillable = [
         'nome',
-        'curso',
-        'periodo',
-        'turno'
     ];
 
-    public function curso(): BelongsTo
+    public function turmas(): HasMany
     {
-        return $this->belongsTo(Curso::class);
-    }
-
-    public function discentes(): HasMany
-    {
-        return $this->hasMany(Discente::class);
+        return $this->hasMany(Turma::class);
     }
 }
