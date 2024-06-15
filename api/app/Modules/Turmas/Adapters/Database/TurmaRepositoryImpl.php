@@ -17,8 +17,9 @@ class TurmaRepositoryImpl extends Repository implements TurmaRepository
     public function findAllTurmas($filtros = [])
     {
         $builder = Turma::query();
+        $builder->with('curso');
 
-        $this->applyTurmasFilters($builder, $filtros);
+        $builder = $this->applyTurmasFilters($builder, $filtros);
 
         $page = isset($filtros['page']) ? max(1, $filtros['page']) : 1;
         $take = isset($filtros['take']) ? max(1, $filtros['take']) : 15;
@@ -33,20 +34,23 @@ class TurmaRepositoryImpl extends Repository implements TurmaRepository
                 $builder = $this->whereLike($builder, 'nome', $filtros['nome']);
             }
 
-            if (isset($filtros['curso'])) {
-                $builder = $this->whereLike($builder, 'curso', $filtros['curso']);
+            if (isset($filtros['curso_id'])) {
+                $builder->where('curso_id', $filtros['curso_id']);
             }
 
             if (isset($filtros['periodo'])) {
                 $builder = $this->whereLike($builder, 'periodo', $filtros['periodo']);
             }
         }
+
+        return $builder;
     }
 
     function findTurmaById(string $turmaId): Turma | null
     {
         $builder = Turma::query();
+        $builder->with('curso');
 
-        return $builder->where('id', '=', $turmaId)->first();
+        return $builder->first();
     }
 }

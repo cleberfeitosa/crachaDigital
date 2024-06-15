@@ -27,14 +27,14 @@ class Turma extends Model
      */
     protected $fillable = [
         'nome',
-        'curso',
+        'curso_id',
         'periodo',
         'turno'
     ];
 
     public function curso(): BelongsTo
     {
-        return $this->belongsTo(Curso::class);
+        return $this->belongsTo(Curso::class, 'curso_id');
     }
 
     public function discentes(): HasMany
