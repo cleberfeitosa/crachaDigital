@@ -38,6 +38,12 @@ class DiscenteRepositoryImpl extends Repository implements DiscenteRepository
             if (isset($filtros['turma_id'])) {
                 $builder->where('turma_id', $filtros['turma_id']);
             }
+            if (isset($filtros['matricula'])) {
+                $builder = $this->whereLike($builder, 'matricula', $filtros['matricula']);
+            }
+            if (isset($filtros['nome'])) {
+                $builder = $this->whereLike($builder, 'nome', $filtros['nome']);
+            }
         }
     }
 }
