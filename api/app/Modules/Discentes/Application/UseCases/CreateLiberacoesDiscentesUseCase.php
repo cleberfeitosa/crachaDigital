@@ -5,6 +5,7 @@ namespace App\Modules\Discentes\Application\UseCases;
 use App\Modules\Discentes\Adapters\Database\DiscenteRepositoryImpl;
 use App\Modules\Discentes\Adapters\Database\LiberacaoDiscenteRepositoryImpl;
 use App\Modules\Discentes\Adapters\Dto\CreateLiberacoesDiscentesDto;
+use App\Modules\Discentes\Adapters\Jobs\EncerrarLiberacaoDiscenteJob;
 use App\Modules\Discentes\Core\Entities\LiberacaoDiscente;
 use App\Modules\Discentes\Core\Exceptions\DiscenteNotExistsException;
 use App\Modules\Discentes\Core\Exceptions\LiberacaoDiscenteIsAtivaException;
@@ -32,8 +33,12 @@ class CreateLiberacoesDiscentesUseCase
             throw DiscenteNotExistsException::fromDiscentesIds($discentesIdsNotExists);
         }
 
-        $liberacoesDiscentes = $this->liberacaoDiscenteRepository->findLiberacaoDiscenteByDiscentesIds($createLiberacoesDiscentesDto->discentesIds);
-        $discentesIdsWithLiberacaoAtiva = $liberacoesDiscentes->pluck('discente_id')->toArray();
+        $liberacoesDiscentes = $this->liberacaoDiscenteRepository
+            ->findLiberacoesDiscentesAtivasByDiscentesIds($createLiberacoesDiscentesDto->discentesIds);
+
+        $discentesIdsWithLiberacaoAtiva = $liberacoesDiscentes
+            ->pluck('discente_id')
+            ->toArray();
         if (
             !empty($discentesIdsWithLiberacaoAtiva)
         ) {
@@ -44,11 +49,20 @@ class CreateLiberacoesDiscentesUseCase
 
         $savedLiberacoesDiscentes = $this->liberacaoDiscenteRepository->saveMany($liberacoesDiscentes);
 
+        foreach ($savedLiberacoesDiscentes as $savedLiberacaoDiscente) {
+            $this->enfileirarJobParaEncerrarLiberacao($savedLiberacaoDiscente);
+        }
+
         return $savedLiberacoesDiscentes;
     }
 
     private function mapCreateLiberacao($discenteId): LiberacaoDiscente
     {
         return LiberacaoDiscente::createLiberacaoDiscente($discenteId);
+    }
+
+    private function enfileirarJobParaEncerrarLiberacao(LiberacaoDiscente $liberacaoDiscente)
+    {
+        EncerrarLiberacaoDiscenteJob::dispatch($liberacaoDiscente, EncerrarLiberacaoDiscenteUseCase::class)->delay(now()->addMinutes(30));
     }
 }

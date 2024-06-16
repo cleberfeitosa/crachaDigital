@@ -47,3 +47,7 @@ As seguintes ferramentas são utilizadas no projeto:
    ```shell
    php artisan serve
    ```
+7. Inicie a fila de Jobs
+   ```shell
+   php artisan queue:work
+   ```
