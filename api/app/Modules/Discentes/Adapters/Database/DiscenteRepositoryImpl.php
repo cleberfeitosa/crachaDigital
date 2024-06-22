@@ -20,6 +20,13 @@ class DiscenteRepositoryImpl extends Repository implements DiscenteRepository
         return $builder->whereIn('id', $discentesIds)->get();
     }
 
+    public function findDiscenteByMatricula(string $matricula)
+    {
+        $builder = Discente::query();
+
+        return $builder->where('matricula', '=', $matricula)->first();
+    }
+
     public function findAllDiscentes($filtros = [])
     {
         $builder = Discente::query();

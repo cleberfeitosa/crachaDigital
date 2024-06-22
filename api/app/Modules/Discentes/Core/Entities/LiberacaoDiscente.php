@@ -72,4 +72,9 @@ class LiberacaoDiscente extends Model
 
         $this->situacao = SituacaoLiberacaoEnum::ENCERRADA;
     }
+
+    function estaAtiva(): bool
+    {
+        return $this->situacao === SituacaoLiberacaoEnum::ATIVA->value;
+    }
 }

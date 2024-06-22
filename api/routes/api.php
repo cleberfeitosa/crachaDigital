@@ -55,5 +55,12 @@ Route::group([
 ], function ($router) {
     Route::get('/', [DiscenteController::class, 'index']);
     Route::get('/{id}', [DiscenteController::class, 'show']);
-    Route::post('/liberacoes', [LiberacaoDiscenteController::class, 'createLiberacoesDiscentes']);
+});
+
+Route::group([
+    'middleware' => ['jwt.auth', 'role.coordenador_ou_vigilante'],
+    'prefix' => 'discentes/liberacoes'
+], function ($router) {
+    Route::post('/', [LiberacaoDiscenteController::class, 'createLiberacoesDiscentes']);
+    Route::get('/verificar', [LiberacaoDiscenteController::class, 'verificarSeDiscenteEstaLiberado']);
 });

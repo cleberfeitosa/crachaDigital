@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class CoordenadorRoleMiddleware
+class CoordenadorAndVigilanteRoleMiddleware
 {
 
     public function __construct(protected ValidateRoleUseCase $validateRoleUseCase)
@@ -26,7 +26,7 @@ class CoordenadorRoleMiddleware
     {
         try {
             $usuario = Auth::getUser();
-            $this->validateRoleUseCase->run($usuario, [RoleEnum::COORDENADOR->value]);
+            $this->validateRoleUseCase->run($usuario, [RoleEnum::COORDENADOR->value, RoleEnum::VIGILANTE->value]);
 
             return $next($request);
         } catch (\Throwable $th) {

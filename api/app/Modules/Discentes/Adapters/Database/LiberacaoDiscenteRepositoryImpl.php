@@ -38,4 +38,11 @@ class LiberacaoDiscenteRepositoryImpl extends Repository implements LiberacaoDis
 
         return $builder->where('id', $liberacaoDiscenteId)->first();
     }
+
+    public function findLatestLiberacaoDiscenteByDiscenteId(string $discenteId): LiberacaoDiscente | null
+    {
+        $builder = LiberacaoDiscente::query();
+
+        return $builder->where('discente_id', $discenteId)->latest('created_at')->first();
+    }
 }

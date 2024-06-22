@@ -38,7 +38,7 @@ class Discente extends Model
         return $this->belongsTo(Turma::class);
     }
 
-    public function liberacaoAlunos(): HasMany
+    public function liberacaoDiscentes(): HasMany
     {
         return $this->hasMany(LiberacaoDiscente::class);
     }

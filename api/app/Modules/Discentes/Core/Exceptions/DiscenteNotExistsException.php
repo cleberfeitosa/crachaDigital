@@ -24,4 +24,9 @@ class DiscenteNotExistsException extends Exception
         $message = "Os IDs {'$ids'} dos discentes informados não existem.";
         return new DiscenteNotExistsException($message);
     }
+
+    static public function fromMatricula(string $matricula)
+    {
+        return new DiscenteNotExistsException("A matrícula {'$matricula'} do discente informada não existem.");
+    }
 }

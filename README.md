@@ -7,7 +7,7 @@
 
 ## Sobre
 
-O Crachá digital é um projeto, que tem como objetivo digitalizar o processo de liberação de alunos do Instituto Federal de Mato Grosso (IFMT), Campus Rondonópolis.
+O Crachá digital é um projeto, que tem como objetivo digitalizar o processo de liberação de discentes do Instituto Federal de Mato Grosso (IFMT), Campus Rondonópolis.
 
 ## Ferramentas 🛠
 
@@ -50,4 +50,15 @@ As seguintes ferramentas são utilizadas no projeto:
 7. Inicie a fila de Jobs
    ```shell
    php artisan queue:work
+   ```
+
+## Como rodar os testes
+
+1. Rode todos os testes
+   ```shell
+   ./vendor/bin/phpunit tests
+   ```
+2. Rode um teste especifico
+   ```shell
+   ./vendor/bin/phpunit tests/ClassTest.php
    ```

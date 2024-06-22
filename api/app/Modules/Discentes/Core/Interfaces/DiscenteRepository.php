@@ -7,4 +7,5 @@ interface DiscenteRepository
 {
     public function findDiscentesByIds(array $discentesIds);
     public function findAllDiscentes(array $filtros);
+    public function findDiscenteByMatricula(string $matricula);
 }

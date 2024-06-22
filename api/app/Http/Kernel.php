@@ -65,5 +65,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'role.coordenador' =>
         \App\Modules\Auth\Adapters\Http\Middlewares\CoordenadorRoleMiddleware::class,
+        'role.coordenador_ou_vigilante' =>
+        \App\Modules\Auth\Adapters\Http\Middlewares\CoordenadorAndVigilanteRoleMiddleware::class,
     ];
 }
