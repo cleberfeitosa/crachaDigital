@@ -64,3 +64,10 @@ Route::group([
     Route::post('/', [LiberacaoDiscenteController::class, 'createLiberacoesDiscentes']);
     Route::get('/verificar', [LiberacaoDiscenteController::class, 'verificarSeDiscenteEstaLiberado']);
 });
+
+Route::group([
+    'middleware' => ['jwt.auth', 'role.vigilante'],
+    'prefix' => 'discentes/liberacoes'
+], function ($router) {
+    Route::patch('/{id}/confirmar', [LiberacaoDiscenteController::class, 'confirmarSaida']);
+});

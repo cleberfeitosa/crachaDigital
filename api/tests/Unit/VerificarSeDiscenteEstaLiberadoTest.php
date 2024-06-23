@@ -24,7 +24,7 @@ class VerificarSeDiscenteEstaLiberadoTest extends TestCase
     {
 
         $liberacaoDiscente = new LiberacaoDiscente();
-        $liberacaoDiscente->situacao = SituacaoLiberacaoEnum::ATIVA;
+        $liberacaoDiscente->situacao = SituacaoLiberacaoEnum::ATIVA->value;
 
         $estaAtiva = $liberacaoDiscente->estaAtiva();
 

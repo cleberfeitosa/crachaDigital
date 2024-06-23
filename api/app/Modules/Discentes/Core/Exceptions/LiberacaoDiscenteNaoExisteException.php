@@ -11,7 +11,7 @@ class LiberacaoDiscenteNaoExisteException extends Exception
         parent::__construct($message, 404);
     }
 
-    static public function fromId(int $liberacaoDiscenteId)
+    static public function fromId(string $liberacaoDiscenteId)
     {
         return new LiberacaoDiscenteNaoExisteException("O ID '$liberacaoDiscenteId' de liberação de discente informado não existe.");
     }

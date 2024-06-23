@@ -67,5 +67,7 @@ class Kernel extends HttpKernel
         \App\Modules\Auth\Adapters\Http\Middlewares\CoordenadorRoleMiddleware::class,
         'role.coordenador_ou_vigilante' =>
         \App\Modules\Auth\Adapters\Http\Middlewares\CoordenadorAndVigilanteRoleMiddleware::class,
+        'role.vigilante' =>
+        \App\Modules\Auth\Adapters\Http\Middlewares\VigilanteRoleMiddleware::class,
     ];
 }

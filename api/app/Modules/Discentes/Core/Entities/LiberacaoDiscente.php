@@ -4,6 +4,7 @@ namespace App\Modules\Discentes\Core\Entities;
 
 use App\Modules\Discentes\Core\Enums\SituacaoLiberacaoEnum;
 use App\Modules\Discentes\Core\Exceptions\LiberacaoDiscenteIsEncerradaException;
+use App\Modules\Discentes\Core\Exceptions\LiberacaoDiscenteIsNotAtivaException;
 use App\Modules\Discentes\Core\Exceptions\LiberacaoDiscenteIsRetidaException;
 use App\Modules\Usuarios\Core\Entities\Usuario;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
@@ -60,7 +61,7 @@ class LiberacaoDiscente extends Model
     /**
      * Métodos personalizados de classe
      */
-    function encerrarLiberacao()
+    function encerrarLiberacao(): void
     {
         if ($this->situacao === SituacaoLiberacaoEnum::ENCERRADA) {
             throw LiberacaoDiscenteIsEncerradaException::newError();
@@ -76,5 +77,14 @@ class LiberacaoDiscente extends Model
     function estaAtiva(): bool
     {
         return $this->situacao === SituacaoLiberacaoEnum::ATIVA->value;
+    }
+
+    function confirmarSaida(): void
+    {
+        if (!$this->estaAtiva()) {
+            throw LiberacaoDiscenteIsNotAtivaException::newError();
+        }
+
+        $this->situacao = SituacaoLiberacaoEnum::CONCLUIDO->value;
     }
 }
