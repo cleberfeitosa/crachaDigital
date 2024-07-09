@@ -3,6 +3,7 @@
 namespace App\Modules\Discentes\Core\Entities;
 
 use App\Modules\Discentes\Core\Enums\SituacaoLiberacaoEnum;
+use App\Modules\Discentes\Core\Exceptions\LiberacaoDiscenteIsConcluidoException;
 use App\Modules\Discentes\Core\Exceptions\LiberacaoDiscenteIsEncerradaException;
 use App\Modules\Discentes\Core\Exceptions\LiberacaoDiscenteIsNotAtivaException;
 use App\Modules\Discentes\Core\Exceptions\LiberacaoDiscenteIsRetidaException;
@@ -69,6 +70,10 @@ class LiberacaoDiscente extends Model
 
         if ($this->situacao === SituacaoLiberacaoEnum::RETIDO) {
             throw LiberacaoDiscenteIsRetidaException::newError();
+        }
+
+        if ($this->situacao === SituacaoLiberacaoEnum::CONCLUIDO) {
+            throw LiberacaoDiscenteIsConcluidoException::newError();
         }
 
         $this->situacao = SituacaoLiberacaoEnum::ENCERRADA;
