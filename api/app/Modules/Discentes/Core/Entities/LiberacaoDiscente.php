@@ -79,12 +79,24 @@ class LiberacaoDiscente extends Model
         return $this->situacao === SituacaoLiberacaoEnum::ATIVA->value;
     }
 
-    function confirmarSaida(): void
+    function confirmarSaida(string $vigilanteId): void
     {
         if (!$this->estaAtiva()) {
             throw LiberacaoDiscenteIsNotAtivaException::newError();
         }
 
+        $this->vigilante_id = $vigilanteId;
         $this->situacao = SituacaoLiberacaoEnum::CONCLUIDO->value;
+    }
+
+    function negarSaida(string $vigilanteId, string $motivo): void
+    {
+        if (!$this->estaAtiva()) {
+            throw LiberacaoDiscenteIsNotAtivaException::newError();
+        }
+
+        $this->motivo_negacao = $motivo;
+        $this->vigilante_id = $vigilanteId;
+        $this->situacao = SituacaoLiberacaoEnum::RETIDO->value;
     }
 }

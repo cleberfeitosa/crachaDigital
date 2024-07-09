@@ -70,4 +70,5 @@ Route::group([
     'prefix' => 'discentes/liberacoes'
 ], function ($router) {
     Route::patch('/{id}/confirmar', [LiberacaoDiscenteController::class, 'confirmarSaida']);
+    Route::patch('/{id}/negar', [LiberacaoDiscenteController::class, 'negarSaida']);
 });

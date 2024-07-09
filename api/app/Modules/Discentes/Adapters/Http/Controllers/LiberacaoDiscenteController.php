@@ -6,9 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Modules\Common\Application\Utils\ExceptionHandler;
 use App\Modules\Discentes\Adapters\Dto\ConfirmarSaidaDto;
 use App\Modules\Discentes\Adapters\Dto\CreateLiberacoesDiscentesDto;
+use App\Modules\Discentes\Adapters\Dto\NegarSaidaDto;
 use App\Modules\Discentes\Adapters\Dto\VerificarSeDiscenteEstaLiberadoDto;
 use App\Modules\Discentes\Application\UseCases\ConfirmarSaidaUseCase;
 use App\Modules\Discentes\Application\UseCases\CreateLiberacoesDiscentesUseCase;
+use App\Modules\Discentes\Application\UseCases\NegarSaidaUseCase;
 use App\Modules\Discentes\Application\UseCases\VerificarSeDiscenteEstaLiberadoUseCase;
 use Illuminate\Http\Request;
 
@@ -18,7 +20,8 @@ class LiberacaoDiscenteController extends Controller
     public function __construct(
         protected CreateLiberacoesDiscentesUseCase $createLiberacoesDiscentesUseCase,
         protected VerificarSeDiscenteEstaLiberadoUseCase $verificarSeDiscenteEstaLiberadoUseCase,
-        protected ConfirmarSaidaUseCase $confirmarSaidaUseCase
+        protected ConfirmarSaidaUseCase $confirmarSaidaUseCase,
+        protected NegarSaidaUseCase $negarSaidaUseCase
     ) {
     }
 
@@ -65,6 +68,25 @@ class LiberacaoDiscenteController extends Controller
             $confirmarSaidaDto->liberacaoDiscenteId = $id;
 
             $this->confirmarSaidaUseCase->run($confirmarSaidaDto);
+
+            return response()->noContent();
+        } catch (\Throwable $th) {
+            $formatedException = ExceptionHandler::format($th);
+            return response()->json($formatedException, $formatedException['code']);
+        }
+    }
+    public function negarSaida(Request $request, string $id)
+    {
+        try {
+            $usuarioId = $request->user()->id;
+            $motivo = $request->input('motivo');
+
+            $negarSaidaDto = new NegarSaidaDto();
+            $negarSaidaDto->usuarioId = $usuarioId;
+            $negarSaidaDto->motivo = $motivo;
+            $negarSaidaDto->liberacaoDiscenteId = $id;
+
+            $this->negarSaidaUseCase->run($negarSaidaDto);
 
             return response()->noContent();
         } catch (\Throwable $th) {

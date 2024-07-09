@@ -3,11 +3,11 @@
 namespace App\Modules\Discentes\Application\UseCases;
 
 use App\Modules\Discentes\Adapters\Database\LiberacaoDiscenteRepositoryImpl;
-use App\Modules\Discentes\Adapters\Dto\ConfirmarSaidaDto;
+use App\Modules\Discentes\Adapters\Dto\NegarSaidaDto;
 use App\Modules\Discentes\Application\Services\LiberacaoDiscenteService;
 use App\Modules\Usuarios\Application\Services\UsuarioService;
 
-class ConfirmarSaidaUseCase
+class NegarSaidaUseCase
 {
     public function __construct(
         protected LiberacaoDiscenteService $liberacaoDiscenteService,
@@ -16,13 +16,13 @@ class ConfirmarSaidaUseCase
     ) {
     }
 
-    public function run(ConfirmarSaidaDto $confirmarSaidaDto)
+    public function run(NegarSaidaDto $negarSaidaDto)
     {
-        $this->usuarioService->findById($confirmarSaidaDto->usuarioId);
+        $this->usuarioService->findById($negarSaidaDto->usuarioId);
 
-        $liberacaoDiscente = $this->liberacaoDiscenteService->findById($confirmarSaidaDto->liberacaoDiscenteId);
+        $liberacaoDiscente = $this->liberacaoDiscenteService->findById($negarSaidaDto->liberacaoDiscenteId);
 
-        $liberacaoDiscente->confirmarSaida($confirmarSaidaDto->usuarioId);
+        $liberacaoDiscente->negarSaida($negarSaidaDto->usuarioId, $negarSaidaDto->motivo);
 
         $this->liberacaoDiscenteRepository->save($liberacaoDiscente);
     }
